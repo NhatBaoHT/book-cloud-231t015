@@ -1,0 +1,47 @@
+<h2>Thêm Sách Mới</h2>
+{{#if error}}<p style="color: red; font-weight: bold;">{{error}}</p>{{/if}}
+{{#if success}}<p style="color: green; font-weight: bold;">{{success}}</p>{{/if}}
+
+<form action="/books/add" method="POST">
+  <div>
+    <label>Mã sản phẩm (Tiền tố bắt buộc: 015):</label><br>
+    <input type="text" name="productCode" placeholder="015-BK01" required>
+  </div>
+  <br>
+  <div>
+    <label>Tên sách:</label><br>
+    <input type="text" name="title" required>
+  </div>
+  <br>
+  <div>
+    <label>Giá gốc (VNĐ):</label><br>
+    <input type="number" name="price" required>
+  </div>
+  <br>
+  <button type="submit">Lưu Sản Phẩm</button>
+</form>
+
+<hr>
+<h2>Danh Sách Sách Trong Kho</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Mã sản phẩm</th>
+      <th>Tên sách</th>
+      <th>Giá gốc</th>
+      <th>Thuế VAT</th>
+      <th>Giá sau thuế</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each books}}
+    <tr>
+      <td>{{this.productCode}}</td>
+      <td>{{this.title}}</td>
+      <td>{{this.originalPrice}}</td>
+      <td>{{this.vatRate}}%</td>
+      <td><strong>{{this.finalPrice}}</strong></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
